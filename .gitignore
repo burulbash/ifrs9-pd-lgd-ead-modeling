@@ -29,3 +29,9 @@ Thumbs.db
 
 .env
 .pytest_cache/
+
+# Row-level generated outputs
+outputs/reports/*_predictions.csv
+outputs/reports/*_facility_level.csv
+outputs/reports/ifrs9_staged_portfolio.csv
+outputs/reports/validation_psi_details.csv
