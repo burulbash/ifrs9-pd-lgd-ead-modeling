@@ -1,0 +1,2 @@
+check_name,ratings_checked,is_monotonic,violations_count
+rating_monotonicity,6,False,1

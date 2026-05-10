@@ -1,0 +1,7 @@
+area,metric,value
+pd_backtesting,ratings_count,6.0
+pd_backtesting,total_defaults,121.0
+rating_monotonicity,violations_count,1.0
+psi,max_feature_psi,0.6466478965063299
+ifrs9_staging,stage_2_share,0.13025693467979035
+ifrs9_ecl,total_ecl,84056734.5185885
