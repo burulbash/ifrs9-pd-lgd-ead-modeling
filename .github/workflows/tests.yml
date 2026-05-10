@@ -1,0 +1,48 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: run tests
+        run: python -m pytest -q
+
+      - name: compile python files
+        run: python -m compileall database src tests
+
+      - name: run pd training sample
+        run: python src/train_pd_model.py --source csv --csv-path data/sample/pd_modeling_sample.csv --max-rows 1000
+
+      - name: run lgd training sample
+        run: python src/train_lgd_model.py --source csv --csv-path data/sample/lgd_modeling_sample.csv --max-rows 1000
+
+      - name: run ead ccf training sample
+        run: python src/train_ead_ccf_model.py --source csv --csv-path data/sample/ead_ccf_modeling_sample.csv --max-rows 1000
+
+      - name: run ifrs9 staging sample
+        run: python src/run_ifrs9_staging.py --source csv --csv-path data/sample/ifrs9_staging_sample.csv
+
+      - name: run ifrs9 ecl sample
+        run: python src/run_ifrs9_ecl.py --source csv --csv-path data/sample/ifrs9_staging_sample.csv
+
+      - name: run stress scenarios sample
+        run: python src/run_stress_scenarios.py --source csv --csv-path data/sample/ifrs9_staging_sample.csv
+
+      - name: make plots
+        run: python src/make_plots.py
