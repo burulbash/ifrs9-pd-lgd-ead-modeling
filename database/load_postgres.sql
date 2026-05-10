@@ -1,0 +1,9 @@
+\copy raw.companies FROM '{{DATA_DIR}}/companies.csv' WITH (FORMAT csv, HEADER true);
+\copy raw.financial_statements FROM '{{DATA_DIR}}/financial_statements.csv' WITH (FORMAT csv, HEADER true);
+\copy raw.loan_facilities FROM '{{DATA_DIR}}/loan_facilities.csv' WITH (FORMAT csv, HEADER true);
+\copy raw.collateral FROM '{{DATA_DIR}}/collateral.csv' WITH (FORMAT csv, HEADER true);
+\copy raw.payments FROM '{{DATA_DIR}}/payments.csv' WITH (FORMAT csv, HEADER true);
+\copy raw.defaults FROM '{{DATA_DIR}}/defaults.csv' WITH (FORMAT csv, HEADER true);
+\copy raw.recoveries FROM '{{DATA_DIR}}/recoveries.csv' WITH (FORMAT csv, HEADER true);
+\copy raw.rating_history FROM '{{DATA_DIR}}/rating_history.csv' WITH (FORMAT csv, HEADER true);
+\copy raw.macro_scenarios FROM '{{DATA_DIR}}/macro_scenarios.csv' WITH (FORMAT csv, HEADER true);
