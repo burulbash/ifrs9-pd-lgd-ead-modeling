@@ -1,0 +1,43 @@
+check_group,check_name,table_name,metric_name,metric_value,threshold_value,status,details,checked_at
+date_check,payment within 31 days before origination,raw.payments,warning_count,15165,0,WARN,Some monthly synthetic payment snapshots can fall shortly before origination when a facility starts mid-month.,2026-05-12 23:59:20.53768+05
+amount_check,negative collateral value,raw.collateral,invalid_count,0,0,PASS,Collateral value should not be negative.,2026-05-12 23:59:20.53768+05
+amount_check,negative facility amounts,raw.loan_facilities,invalid_count,0,0,PASS,"Limit, outstanding and undrawn amounts should not be negative.",2026-05-12 23:59:20.53768+05
+amount_check,negative payment amounts,raw.payments,invalid_count,0,0,PASS,Payment and outstanding amounts should not be negative.,2026-05-12 23:59:20.53768+05
+amount_check,negative recovery amounts,raw.recoveries,invalid_count,0,0,PASS,Recovery amount and collection cost should not be negative.,2026-05-12 23:59:20.53768+05
+amount_check,negative revenue,raw.financial_statements,invalid_count,0,0,PASS,Revenue should not be negative in this synthetic dataset.,2026-05-12 23:59:20.53768+05
+amount_check,negative total assets,raw.financial_statements,invalid_count,0,0,PASS,Total assets should not be negative.,2026-05-12 23:59:20.53768+05
+date_check,default before origination,raw.defaults,invalid_count,0,0,PASS,Default date should not be earlier than facility origination date.,2026-05-12 23:59:20.53768+05
+date_check,maturity before origination,raw.loan_facilities,invalid_count,0,0,PASS,Facility maturity date should not be earlier than origination date.,2026-05-12 23:59:20.53768+05
+date_check,payment more than 31 days before origination,raw.payments,invalid_count,0,0,PASS,Payment date should not be materially earlier than facility origination date. A 31-day tolerance allows monthly synthetic payment snapshots.,2026-05-12 23:59:20.53768+05
+date_check,recovery before default,raw.recoveries,invalid_count,0,0,PASS,Recovery date should not be earlier than default date.,2026-05-12 23:59:20.53768+05
+duplicate_check,duplicate company report date,raw.financial_statements,duplicate_count,0,0,PASS,There should be one financial statement per company and report date.,2026-05-12 23:59:20.53768+05
+duplicate_check,duplicate company_id,raw.companies,duplicate_count,0,0,PASS,company_id should be unique.,2026-05-12 23:59:20.53768+05
+duplicate_check,duplicate facility_id,raw.loan_facilities,duplicate_count,0,0,PASS,facility_id should be unique.,2026-05-12 23:59:20.53768+05
+duplicate_check,duplicate payment_id,raw.payments,duplicate_count,0,0,PASS,payment_id should be unique.,2026-05-12 23:59:20.53768+05
+ifrs9_check,current dpd negative values,mart.ifrs9_staging_sample,invalid_count,0,0,PASS,Current DPD should not be negative.,2026-05-12 23:59:20.53768+05
+ifrs9_check,ifrs9 default flag rate,mart.ifrs9_staging_sample,default_flag_rate,0.04946951297456218842,,PASS,Default flag rate should be plausible for the synthetic portfolio.,2026-05-12 23:59:20.53768+05
+modeling_sample_check,ccf average,mart.ead_ccf_modeling_sample,avg_ccf,0.53886654916560611389,,PASS,Average realized CCF should be within expected bounds.,2026-05-12 23:59:20.53768+05
+modeling_sample_check,ccf bounds,mart.ead_ccf_modeling_sample,invalid_count,0,0,PASS,Realized CCF should be between 0 and 1.5 after clipping.,2026-05-12 23:59:20.53768+05
+modeling_sample_check,lgd average,mart.lgd_modeling_sample,avg_lgd,0.69684934823222743506,,PASS,Average realized LGD should be within valid probability bounds.,2026-05-12 23:59:20.53768+05
+modeling_sample_check,lgd bounds,mart.lgd_modeling_sample,invalid_count,0,0,PASS,Realized LGD should be between 0 and 1 after clipping.,2026-05-12 23:59:20.53768+05
+modeling_sample_check,pd default rate,mart.pd_modeling_sample,default_rate,0.03080659593506327496,,PASS,PD target default rate should be non-zero and plausible for the synthetic portfolio.,2026-05-12 23:59:20.53768+05
+modeling_sample_check,pd target nulls,mart.pd_modeling_sample,null_count,0,0,PASS,PD target should not be null.,2026-05-12 23:59:20.53768+05
+null_check,company_id nulls,raw.companies,null_count,0,0,PASS,company_id is the primary borrower key.,2026-05-12 23:59:20.53768+05
+null_check,facility_id nulls,raw.loan_facilities,null_count,0,0,PASS,facility_id is the primary facility key.,2026-05-12 23:59:20.53768+05
+null_check,payment_id nulls,raw.payments,null_count,0,0,PASS,payment_id is the primary payment key.,2026-05-12 23:59:20.53768+05
+row_count,ead ccf modeling sample rows,mart.ead_ccf_modeling_sample,rows,267,1,PASS,EAD/CCF sample contains revolving defaulted facilities only.,2026-05-12 23:59:20.53768+05
+row_count,financial ratios mart rows,mart.financial_ratios_mart,rows,15646,1,PASS,Financial ratios mart should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,ifrs9 staging sample rows,mart.ifrs9_staging_sample,rows,15646,1,PASS,IFRS 9 staging sample should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,lgd modeling sample rows,mart.lgd_modeling_sample,rows,774,1,PASS,LGD sample contains defaulted facilities only.,2026-05-12 23:59:20.53768+05
+row_count,pd modeling sample rows,mart.pd_modeling_sample,rows,15646,1,PASS,PD modeling sample should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,raw companies rows,raw.companies,rows,10000,1,PASS,Raw borrower table should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,raw defaults rows,raw.defaults,rows,774,1,PASS,"Defaults can be sparse, but the synthetic medium portfolio should contain default events.",2026-05-12 23:59:20.53768+05
+row_count,raw financial statements rows,raw.financial_statements,rows,50000,1,PASS,Raw financial statements table should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,raw loan facilities rows,raw.loan_facilities,rows,15646,1,PASS,Raw loan facilities table should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,raw macro scenarios rows,raw.macro_scenarios,rows,288,1,PASS,Macro scenarios table should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,raw payments rows,raw.payments,rows,337308,1,PASS,Raw payments table should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,raw rating history rows,raw.rating_history,rows,40000,1,PASS,Rating history table should not be empty.,2026-05-12 23:59:20.53768+05
+row_count,raw recoveries rows,raw.recoveries,rows,1450,1,PASS,Recoveries should exist for part of the defaulted portfolio.,2026-05-12 23:59:20.53768+05
+ifrs9_stage_distribution,stage 1 facilities,mart.ifrs9_staging_sample,facilities,12834,,INFO,Stage proxy calculated from the same staging rules used in Python.,2026-05-12 23:59:20.53768+05
+ifrs9_stage_distribution,stage 2 facilities,mart.ifrs9_staging_sample,facilities,2038,,INFO,Stage proxy calculated from the same staging rules used in Python.,2026-05-12 23:59:20.53768+05
+ifrs9_stage_distribution,stage 3 facilities,mart.ifrs9_staging_sample,facilities,774,,INFO,Stage proxy calculated from the same staging rules used in Python.,2026-05-12 23:59:20.53768+05
