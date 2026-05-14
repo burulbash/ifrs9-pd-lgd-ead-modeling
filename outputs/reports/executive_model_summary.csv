@@ -1,0 +1,29 @@
+area,metric,value,comment
+PD,best_oot_model,logistic_regression,Best PD model selected by OOT ROC-AUC.
+PD,pd_oot_roc_auc,0.657236,PD model OOT ROC-AUC.
+PD,pd_oot_gini,0.314473,PD model OOT Gini.
+PD,pd_oot_ks,0.255055,PD model OOT KS.
+PD,pd_oot_brier_score,0.049292,PD probability calibration loss.
+LGD,best_oot_model,random_forest,Best LGD model selected by OOT weighted MAE.
+LGD,lgd_oot_mae,0.090492,LGD OOT MAE.
+LGD,lgd_oot_rmse,0.114227,LGD OOT RMSE.
+LGD,lgd_oot_weighted_mae,0.104892,LGD OOT weighted MAE.
+EAD_CCF,best_oot_model,random_forest,Best EAD/CCF model selected by OOT weighted MAE.
+EAD_CCF,ead_ccf_oot_mae,0.165091,EAD/CCF OOT MAE.
+EAD_CCF,ead_ccf_oot_rmse,0.191755,EAD/CCF OOT RMSE.
+EAD_CCF,ead_ccf_oot_weighted_mae,0.197936,EAD/CCF OOT weighted MAE.
+IFRS9_ECL,portfolio_facilities,15646,Number of facilities in the ECL portfolio.
+IFRS9_ECL,portfolio_total_ead,972072113.77,Total EAD.
+IFRS9_ECL,portfolio_total_ecl,84056734.52,Scenario-weighted total ECL.
+IFRS9_ECL,portfolio_ecl_rate,0.086472,Total ECL divided by total EAD.
+IFRS9_ECL,stage_1_share,0.820274,Facility share in Stage 1.
+IFRS9_ECL,stage_2_share,0.130257,Facility share in Stage 2.
+IFRS9_ECL,stage_3_share,0.04947,Facility share in Stage 3.
+Stress,severe_downturn_total_ecl,115916907.87,Total ECL under severe downturn.
+Stress,severe_downturn_ecl_change_pct_vs_base,0.405094,ECL increase versus base.
+Monitoring,max_psi_feature,revenue_growth_yoy,Feature with the highest PSI.
+Monitoring,max_psi_value,0.646648,Highest PSI value.
+Validation,rating_monotonicity_violations,1,Number of rating monotonicity violations.
+Data Quality,data_quality_fail_count,0,Number of failed data quality checks.
+Data Quality,data_quality_warn_count,1,Number of warning data quality checks.
+Data Quality,data_quality_pass_count,38,Number of passed data quality checks.
