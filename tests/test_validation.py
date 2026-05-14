@@ -108,3 +108,15 @@ def test_build_rating_binomial_backtesting() -> None:
     assert "traffic_light" in report.columns
     assert report["expected_defaults"].iloc[0] == 1
     assert set(report["traffic_light"]).issubset({"GREEN", "AMBER", "RED", "UNKNOWN"})
+
+
+def test_wilson_confidence_interval_bounds() -> None:
+    from src.validation import wilson_confidence_interval
+
+    lower, upper = wilson_confidence_interval(
+        observed_defaults=5,
+        facilities=100,
+    )
+
+    assert 0 <= lower <= upper <= 1
+    assert lower < 0.05 < upper

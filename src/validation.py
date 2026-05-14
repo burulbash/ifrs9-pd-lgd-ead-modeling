@@ -57,6 +57,17 @@ def build_pd_backtesting_by_rating(
 
     report["calibration_error"] = report["avg_predicted_pd"] - report["observed_default_rate"]
 
+    ci_values = report.apply(
+        lambda row: wilson_confidence_interval(
+            observed_defaults=row["defaults"],
+            facilities=row["facilities"],
+        ),
+        axis=1,
+    )
+
+    report["observed_default_rate_lower_ci"] = [value[0] for value in ci_values]
+    report["observed_default_rate_upper_ci"] = [value[1] for value in ci_values]
+
     return report.drop(columns=["rating_order"])
 
 
@@ -403,6 +414,38 @@ def assign_backtesting_traffic_light(p_value: float) -> str:
     if p_value >= 0.01:
         return "AMBER"
     return "RED"
+
+
+def wilson_confidence_interval(
+    observed_defaults: float,
+    facilities: float,
+    confidence_z: float = 1.96,
+) -> tuple[float, float]:
+    """Wilson confidence interval for observed default rate."""
+
+    import math
+
+    n = float(facilities)
+    k = float(observed_defaults)
+
+    if n <= 0:
+        return float("nan"), float("nan")
+
+    p_hat = k / n
+    z = float(confidence_z)
+
+    denominator = 1 + z**2 / n
+    center = (p_hat + z**2 / (2 * n)) / denominator
+    half_width = (
+        z
+        * math.sqrt((p_hat * (1 - p_hat) / n) + (z**2 / (4 * n**2)))
+        / denominator
+    )
+
+    lower = max(0.0, center - half_width)
+    upper = min(1.0, center + half_width)
+
+    return float(lower), float(upper)
 
 
 def build_rating_binomial_backtesting(
