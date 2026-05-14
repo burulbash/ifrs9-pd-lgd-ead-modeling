@@ -83,3 +83,28 @@ def test_calculate_psi_positive_when_distribution_shifts() -> None:
     psi, _ = calculate_psi(expected, actual, bins=4)
 
     assert psi > 0
+
+
+def test_build_rating_binomial_backtesting() -> None:
+    from src.validation import build_rating_binomial_backtesting
+
+    rating_report = pd.DataFrame(
+        {
+            "rating_grade": ["A", "B"],
+            "facilities": [100, 100],
+            "defaults": [1, 10],
+            "observed_default_rate": [0.01, 0.10],
+            "avg_predicted_pd": [0.01, 0.03],
+            "min_predicted_pd": [0.001, 0.02],
+            "max_predicted_pd": [0.02, 0.04],
+            "calibration_error": [0.0, -0.07],
+        }
+    )
+
+    report = build_rating_binomial_backtesting(rating_report)
+
+    assert "expected_defaults" in report.columns
+    assert "binomial_p_value" in report.columns
+    assert "traffic_light" in report.columns
+    assert report["expected_defaults"].iloc[0] == 1
+    assert set(report["traffic_light"]).issubset({"GREEN", "AMBER", "RED", "UNKNOWN"})

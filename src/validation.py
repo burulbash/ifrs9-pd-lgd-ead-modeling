@@ -363,3 +363,80 @@ def build_validation_summary(
     )
 
     return pd.DataFrame(rows)
+
+
+def approximate_binomial_two_sided_p_value(
+    observed_defaults: float,
+    facilities: float,
+    expected_pd: float,
+) -> float:
+    """Normal approximation for a two-sided binomial backtesting p-value."""
+
+    import math
+
+    n = float(facilities)
+    k = float(observed_defaults)
+    p = float(expected_pd)
+
+    if n <= 0:
+        return float("nan")
+
+    p = min(max(p, 1e-9), 1 - 1e-9)
+
+    expected = n * p
+    variance = n * p * (1 - p)
+
+    if variance <= 0:
+        return float("nan")
+
+    z_score = (k - expected) / math.sqrt(variance)
+    p_value = math.erfc(abs(z_score) / math.sqrt(2))
+
+    return float(min(max(p_value, 0), 1))
+
+
+def assign_backtesting_traffic_light(p_value: float) -> str:
+    if pd.isna(p_value):
+        return "UNKNOWN"
+    if p_value >= 0.05:
+        return "GREEN"
+    if p_value >= 0.01:
+        return "AMBER"
+    return "RED"
+
+
+def build_rating_binomial_backtesting(
+    rating_report: pd.DataFrame,
+) -> pd.DataFrame:
+    """Build rating-level observed defaults vs expected defaults backtesting report."""
+
+    data = rating_report.copy()
+
+    data["expected_defaults"] = (
+        pd.to_numeric(data["facilities"], errors="coerce")
+        * pd.to_numeric(data["avg_predicted_pd"], errors="coerce")
+    )
+
+    data["binomial_p_value"] = data.apply(
+        lambda row: approximate_binomial_two_sided_p_value(
+            observed_defaults=row["defaults"],
+            facilities=row["facilities"],
+            expected_pd=row["avg_predicted_pd"],
+        ),
+        axis=1,
+    )
+
+    data["traffic_light"] = data["binomial_p_value"].apply(assign_backtesting_traffic_light)
+
+    columns = [
+        "rating_grade",
+        "facilities",
+        "defaults",
+        "expected_defaults",
+        "avg_predicted_pd",
+        "observed_default_rate",
+        "binomial_p_value",
+        "traffic_light",
+    ]
+
+    return data[columns].rename(columns={"defaults": "observed_defaults"})

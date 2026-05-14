@@ -15,6 +15,7 @@ from src.splitting import make_time_split  # noqa: E402
 from src.validation import (  # noqa: E402
     build_ecl_validation_summary,
     build_pd_backtesting_by_rating,
+    build_rating_binomial_backtesting,
     build_pd_calibration_by_decile,
     build_psi_report,
     build_stage_validation_summary,
@@ -93,6 +94,8 @@ def main() -> None:
         target_column=TARGET_DEFAULT_12M,
     )
 
+    rating_binomial_backtesting = build_rating_binomial_backtesting(pd_backtesting)
+
     monotonicity_summary, monotonicity_violations = check_rating_monotonicity(pd_backtesting)
 
     pd_calibration = build_pd_calibration_by_decile(
@@ -139,6 +142,7 @@ def main() -> None:
     )
 
     pd_backtesting.to_csv(REPORTS_DIR / "validation_pd_backtesting_by_rating.csv", index=False)
+    rating_binomial_backtesting.to_csv(REPORTS_DIR / "validation_rating_binomial_backtesting.csv", index=False)
     pd_calibration.to_csv(REPORTS_DIR / "validation_pd_calibration_by_decile.csv", index=False)
     monotonicity_summary.to_csv(REPORTS_DIR / "validation_rating_monotonicity_summary.csv", index=False)
     monotonicity_violations.to_csv(REPORTS_DIR / "validation_rating_monotonicity_violations.csv", index=False)
