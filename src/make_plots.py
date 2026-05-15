@@ -13,6 +13,7 @@ from src.plots import (  # noqa: E402
     save_actual_vs_predicted_plot,
     save_bar_plot,
     save_line_plot,
+    save_rating_calibration_confidence_plot,
 )
 
 
@@ -203,6 +204,20 @@ def make_validation_plots() -> None:
             xlabel="Rating grade",
             ylabel="Default rate / PD",
         )
+
+        required_columns = {
+            "rating_grade",
+            "observed_default_rate",
+            "avg_predicted_pd",
+            "observed_default_rate_lower_ci",
+            "observed_default_rate_upper_ci",
+        }
+
+        if required_columns.issubset(set(pd_backtesting.columns)):
+            save_rating_calibration_confidence_plot(
+                pd_backtesting,
+                output_path=PLOTS_DIR / "rating_calibration_with_confidence_bands.png",
+            )
 
 
 def main() -> None:

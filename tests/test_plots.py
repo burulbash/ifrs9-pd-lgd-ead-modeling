@@ -62,3 +62,27 @@ def test_save_actual_vs_predicted_plot_creates_file(tmp_path) -> None:
 
     assert output_path.exists()
     assert output_path.stat().st_size > 0
+
+
+def test_save_rating_calibration_confidence_plot_creates_file(tmp_path) -> None:
+    from src.plots import save_rating_calibration_confidence_plot
+
+    df = pd.DataFrame(
+        {
+            "rating_grade": ["A", "B", "C"],
+            "observed_default_rate": [0.01, 0.03, 0.06],
+            "avg_predicted_pd": [0.012, 0.028, 0.055],
+            "observed_default_rate_lower_ci": [0.005, 0.020, 0.040],
+            "observed_default_rate_upper_ci": [0.020, 0.045, 0.080],
+        }
+    )
+
+    output_path = tmp_path / "rating_calibration_with_confidence_bands.png"
+
+    save_rating_calibration_confidence_plot(
+        df,
+        output_path=output_path,
+    )
+
+    assert output_path.exists()
+    assert output_path.stat().st_size > 0
