@@ -1,0 +1,5 @@
+column,reason,category
+company_id,Identifier columns are not model features.,id
+facility_id,Identifier columns are not model features.,id
+observation_date,"Date columns are used for splitting or event timing, not directly as PD features.",date
+target_default_12m,Target columns directly encode the modeling outcome.,target
