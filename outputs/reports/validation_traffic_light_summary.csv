@@ -1,0 +1,12 @@
+area,metric,value,green_threshold,amber_threshold,red_threshold,status,comment
+PD,pd_oot_gini,0.314473,>= 0.30,>= 0.20,< 0.20,GREEN,OOT Gini for the best PD model.
+PD,pd_oot_ks,0.255055,>= 0.20,>= 0.15,< 0.15,GREEN,OOT KS statistic for the best PD model.
+PD,pd_brier_score,0.049292,<= 0.05,<= 0.08,> 0.08,GREEN,Brier score for PD probability calibration. Lower is better.
+Monitoring,max_feature_psi,0.646648,<= 0.10,<= 0.25,> 0.25,RED,Maximum PSI across monitored features.
+Rating,rating_monotonicity_violations,1.0,= 0,<= 1,> 1,AMBER,Number of rating monotonicity violations.
+Rating,rating_binomial_red_count,4.0,= 0,<= 2,> 2,RED,Number of rating grades with RED binomial backtesting status.
+IFRS9_Staging,stage_2_share,0.130257,0.05 - 0.35,0.01 - 0.50,outside amber band,GREEN,"Stage 2 facility share. This is a portfolio sanity check, not a model performance metric."
+IFRS9_Staging,stage_3_share,0.04947,0.01 - 0.15,0.00 - 0.25,> 0.25,GREEN,Stage 3 facility share. This is a portfolio sanity check.
+Stress,severe_downturn_ecl_change_pct,0.405094,0.10 - 0.70,0.00 - 1.00,outside amber band,GREEN,ECL increase under severe downturn versus base scenario.
+Data Quality,data_quality_fail_count,0.0,= 0,<= 1,> 1,GREEN,Number of failed SQL data quality checks.
+Data Quality,data_quality_warn_count,1.0,= 0,<= 3,> 3,AMBER,Number of warning SQL data quality checks.
