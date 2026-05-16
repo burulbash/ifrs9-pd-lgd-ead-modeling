@@ -29,6 +29,9 @@ jobs:
       - name: run pd training sample
         run: python src/train_pd_model.py --source csv --csv-path data/sample/pd_modeling_sample.csv --max-rows 1000
 
+      - name: run leakage report sample
+        run: python src/run_leakage_report.py --source csv --csv-path data/sample/pd_modeling_sample.csv
+
       - name: run lgd training sample
         run: python src/train_lgd_model.py --source csv --csv-path data/sample/lgd_modeling_sample.csv --max-rows 1000
 
