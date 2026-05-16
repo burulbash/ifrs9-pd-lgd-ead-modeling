@@ -1,0 +1,9 @@
+area,check_name,metric_name,metric_value,status,details
+LGD,rows,rows,774,INFO,Rows in LGD diagnostics input.
+LGD,lgd outside 0 1 bounds,invalid_count,0,PASS,realized_lgd should be between 0 and 1.
+LGD,non positive ead,invalid_count,0,PASS,ead_at_default should be positive.
+LGD,very high ead,outlier_count,0,PASS,ead_at_default greater than 3x p99 is treated as an exposure outlier.
+LGD,negative recoveries,invalid_count,0,PASS,total_recovery_amount should not be negative.
+LGD,recovery greater than ead,warning_count,0,PASS,Total recovery greater than EAD is possible in synthetic data but should be reviewed.
+LGD,negative collection cost,invalid_count,0,PASS,total_collection_cost should not be negative.
+LGD,extreme collection cost,warning_count,0,PASS,Collection cost greater than 50% of EAD is treated as an outlier.

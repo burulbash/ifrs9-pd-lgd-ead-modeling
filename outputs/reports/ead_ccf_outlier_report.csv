@@ -1,0 +1,8 @@
+area,check_name,metric_name,metric_value,status,details
+EAD_CCF,rows,rows,267,INFO,Rows in EAD/CCF diagnostics input.
+EAD_CCF,ccf outside 0 1.5 bounds,invalid_count,0,PASS,realized_ccf should be between 0 and 1.5.
+EAD_CCF,non positive ead,invalid_count,0,PASS,ead_at_default should be positive.
+EAD_CCF,very high ead,outlier_count,0,PASS,ead_at_default greater than 3x p99 is treated as an exposure outlier.
+EAD_CCF,zero or negative undrawn amount,warning_count,0,PASS,undrawn_amount should be positive for CCF modeling rows.
+EAD_CCF,negative outstanding amount,invalid_count,0,PASS,outstanding_amount should not be negative.
+EAD_CCF,ead materially greater than limit,warning_count,0,PASS,EAD greater than 1.5x limit amount should be reviewed.
