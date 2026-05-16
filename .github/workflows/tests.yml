@@ -47,5 +47,8 @@ jobs:
       - name: run stress scenarios sample
         run: python src/run_stress_scenarios.py --source csv --csv-path data/sample/ifrs9_staging_sample.csv
 
+      - name: run executive summary
+        run: python src/run_executive_summary.py
+
       - name: make plots
         run: python src/make_plots.py
