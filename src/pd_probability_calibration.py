@@ -15,11 +15,26 @@ def fit_prefit_calibrator(
     y_valid: pd.Series,
     method: str,
 ):
-    calibrator = CalibratedClassifierCV(
-        estimator=fitted_model,
-        method=method,
-        cv="prefit",
-    )
+    """Calibrate an already fitted estimator on a validation sample.
+
+    Newer scikit-learn versions replaced cv="prefit" with FrozenEstimator.
+    The fallback keeps the code compatible with older versions.
+    """
+
+    try:
+        from sklearn.frozen import FrozenEstimator
+
+        calibrator = CalibratedClassifierCV(
+            estimator=FrozenEstimator(fitted_model),
+            method=method,
+        )
+    except ImportError:
+        calibrator = CalibratedClassifierCV(
+            estimator=fitted_model,
+            method=method,
+            cv="prefit",
+        )
+
     calibrator.fit(X_valid, y_valid)
     return calibrator
 
