@@ -1,0 +1,4 @@
+model,calibration_method,split,rows,roc_auc,gini,ks,average_precision,brier_score,mean_predicted_pd,observed_default_rate,error
+logistic_regression_raw,none,oot,2347,0.6572364170991959,0.3144728341983918,0.25505483652996525,0.09557158568639923,0.04929187254856761,0.025008107348875604,0.05155517682147422,
+logistic_regression_sigmoid_calibrated,sigmoid,oot,2347,,,,,,,0.05155517682147422,"The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead."
+logistic_regression_isotonic_calibrated,isotonic,oot,2347,,,,,,,0.05155517682147422,"The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead."
