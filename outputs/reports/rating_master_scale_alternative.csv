@@ -1,0 +1,7 @@
+original_rating_grade,alternative_rating_grade,rule,original_facilities,original_observed_defaults,original_observed_default_rate,original_avg_predicted_pd
+A,A,unchanged,429,9,0.0209790209790209,0.0027688081420844
+B,B,unchanged,732,26,0.0355191256830601,0.0095152027849047
+C,C,unchanged,667,33,0.0494752623688155,0.0235516770219807
+D,D,unchanged,391,36,0.0920716112531969,0.0500491746249172
+E,E_F,merge E with sparse F bucket,113,17,0.1504424778761062,0.1022232960545234
+F,E_F,merge sparse F into E/F bucket,15,0,0.0,0.2474435006761047
